@@ -1,0 +1,15 @@
+
+*.pem
+
+**/.terraform/*
+
+Makefile
+
+*.tfstate
+*.tfstate.*
+
+*.tfvars
+
+*.hcl
+
+/*.tf
