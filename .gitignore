@@ -3,6 +3,8 @@
 
 **/.terraform/*
 
+key
+
 Makefile
 
 *.tfstate
@@ -13,3 +15,5 @@ Makefile
 *.hcl
 
 /*.tf
+
+*.tpl

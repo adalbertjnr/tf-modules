@@ -37,3 +37,15 @@ variable "lb_tg_timeout" {
 variable "lb_tg_interval" {
   default = 30
 }
+
+variable "listener_port" {
+  default = 80
+}
+
+variable "listener_protocol" {
+  default = "HTTP"
+}
+
+variable "listener_action" {
+  default = "forward"
+}
