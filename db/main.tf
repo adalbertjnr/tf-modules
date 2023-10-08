@@ -10,7 +10,7 @@ resource "aws_db_instance" "db" {
   username               = var.db_user
   password               = var.db_password
   identifier             = var.db_identifier
-  vpc_security_group_ids = var.vpc_security_group_ids
+  vpc_security_group_ids = [var.vpc_security_group_ids]
   skip_final_snapshot    = var.skip_final_snapshot
   tags = {
     Name = "PROJ-RDS-DB"

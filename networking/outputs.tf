@@ -6,7 +6,10 @@ output "db_subnet_group_name_otp" {
   value = aws_db_subnet_group.rds_subnetgroup.*.name
 }
 
-output "db_security_group_otp" {
+output "security_group_otp" {
   value = aws_security_group.sg
 }
 
+output "public_subnets_otp" {
+  value = aws_subnet.public_subnets
+}

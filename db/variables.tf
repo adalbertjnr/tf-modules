@@ -30,7 +30,7 @@ variable "db_subnet_group_name" {}
 variable "vpc_security_group_ids" {}
 
 variable "db_identifier" {
-  default = "proj_db_adalbert"
+  default = "proj-db-adalbert"
 }
 
 variable "skip_final_snapshot" {
