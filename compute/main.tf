@@ -37,15 +37,11 @@ resource "aws_instance" "instance" {
   tags = {
     Name = "PROJ-INSTANCE-${random_id.random_ec2_id[count.index].dec}"
   }
+}
 
-  user_data = templatefile(var.userdata_path,
-    {
-      nodename    = "PROJ-INSTANCE-${random_id.random_ec2_id[count.index].dec}"
-      db_user     = var.db_user
-      db_pass     = var.db_pass
-      db_name     = var.db_name
-      db_endpoint = var.db_endpoint
-    }
-  )
-
+resource "aws_lb_target_group_attachment" "tg_attach" {
+  count            = var.instance_count
+  target_group_arn = var.lb_tg_arn
+  target_id        = aws_instance.instance[count.index].id
+  port             = var.wp_port
 }

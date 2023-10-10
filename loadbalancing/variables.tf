@@ -13,7 +13,7 @@ variable "lb_type" {
 }
 
 variable "tg_port" {
-  default = 80
+  default = 8000
 }
 
 variable "tg_protocol" {
@@ -39,13 +39,19 @@ variable "lb_tg_interval" {
 }
 
 variable "listener_port" {
-  default = 80
+  default = 443
 }
 
 variable "listener_protocol" {
-  default = "HTTP"
+  default = "HTTPS"
 }
 
 variable "listener_action" {
   default = "forward"
 }
+
+variable "ssl_policy" {
+  default = "ELBSecurityPolicy-2016-08"
+}
+
+variable "certificate" {}

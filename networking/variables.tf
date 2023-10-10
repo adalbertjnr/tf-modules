@@ -12,15 +12,18 @@ variable "private_cidrs" {
 }
 
 variable "public_sn_count" {
-  type = number
+  type    = number
+  default = 1
 }
 
 variable "private_sn_count" {
-  type = number
+  type    = number
+  default = 0
 }
 
 variable "shuffleaz_max" {
-  type = number
+  type    = number
+  default = 10
 }
 
 variable "access_addr" {
@@ -30,5 +33,6 @@ variable "access_addr" {
 variable "security_groups" {}
 
 variable "db_subnet_group" {
-  type = bool
+  type    = bool
+  default = false
 }
