@@ -13,7 +13,7 @@ variable "private_cidrs" {
 
 variable "public_sn_count" {
   type    = number
-  default = 1
+  default = 2
 }
 
 variable "private_sn_count" {
@@ -23,7 +23,7 @@ variable "private_sn_count" {
 
 variable "shuffleaz_max" {
   type    = number
-  default = 10
+  default = 2
 }
 
 variable "access_addr" {

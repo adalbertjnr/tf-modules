@@ -1,5 +1,5 @@
 
-resource "aws_iam_role" "eksNodeRole" {
+resource "aws_iam_role" "eks_node_role" {
   name = var.eksNodeRole
 
   assume_role_policy = jsonencode({
@@ -17,26 +17,29 @@ resource "aws_iam_role" "eksNodeRole" {
 //Attach the policy AmazonEKSWorkerNodePolicy to the role above for manage ec2 instances for nodes
 resource "aws_iam_role_policy_attachment" "attachEKSWorkerNodePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
-  role       = aws_iam_role.eksNodeRole.name
+  role       = aws_iam_role.eks_node_role.name
 }
 
 //Attach the policy AmazonEKS_CNI_Policy to the role above for manage the network connectiviy for the nodes
 resource "aws_iam_role_policy_attachment" "attachEKSCNINodePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
-  role       = aws_iam_role.eksNodeRole.name
+  role       = aws_iam_role.eks_node_role.name
 }
 
 //Attach the policy AmazonEC2ContainerRegistryReadOnly to the role above for manage the ecr for the cluster/nodes
 resource "aws_iam_role_policy_attachment" "attachEKSECRNodePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
-  role       = aws_iam_role.eksNodeRole.name
+  role       = aws_iam_role.eks_node_role.name
 }
 
-resource "aws_eks_node_group" "eksNodeGroup" {
+resource "aws_eks_node_group" "eks_node_group" {
   cluster_name    = var.eksClusterName
   node_group_name = var.nodeGroupName
-  node_role_arn   = aws_iam_role.eksNodeRole.name
+  node_role_arn   = aws_iam_role.eks_node_role.arn
   subnet_ids      = var.subnet_ids.*.id
+
+  capacity_type  = "ON_DEMAND"
+  instance_types = ["t2.micro"]
 
   scaling_config {
     desired_size = var.desired_size
@@ -51,7 +54,7 @@ resource "aws_eks_node_group" "eksNodeGroup" {
   depends_on = [
     aws_iam_role_policy_attachment.attachEKSCNINodePolicy,
     aws_iam_role_policy_attachment.attachEKSWorkerNodePolicy,
-    aws_iam_role_policy_attachment.attachEKSECRNodePolicy
+    aws_iam_role_policy_attachment.attachEKSECRNodePolicy,
   ]
 
 }
