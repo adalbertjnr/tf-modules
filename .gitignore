@@ -17,3 +17,9 @@ Makefile
 /*.tf
 
 *.tpl
+
+fileslambda
+
+json
+
+policy
